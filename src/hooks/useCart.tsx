@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
@@ -32,9 +33,13 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     return [];
   });
 
+  const [stocks, setStocks] = useState<Stock[]>([]);
+
+
   const addProduct = async (productId: number) => {
     try {
-      // TODO
+      await api.get('stock').then(response => setStocks(response.data));
+
     } catch {
       toast.error({});
     }
