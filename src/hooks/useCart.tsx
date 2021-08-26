@@ -32,8 +32,8 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const addProduct = async (productId: number) => {
     try {
-      const currentStock = await api.get(`stock/${productId}`).then(response => response.data);
-      const productToAdd = await api.get(`products/${productId}`).then(response => response.data);
+      const { data: currentStock } = await api.get(`stock/${productId}`);
+      const { data: productToAdd } = await api.get(`products/${productId}`);
 
       if (currentStock.amount <= 1) {
         toast.error('Quantidade solicitada fora de estoque');
