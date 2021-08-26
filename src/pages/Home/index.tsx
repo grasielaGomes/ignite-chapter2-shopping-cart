@@ -26,7 +26,9 @@ const Home = (): JSX.Element => {
   const { addProduct, cart } = useCart();
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
-    sumAmount[product.id] += 1 || 1
+    sumAmount[product.id]
+    ? sumAmount[product.id] += 1
+    : sumAmount[product.id] = 1;
     return sumAmount;
   }, {} as CartItemsAmount)
 
@@ -35,7 +37,6 @@ const Home = (): JSX.Element => {
       api.get<ProductFormatted[]>('products')
         .then(response => setProducts(response.data));
     }
-
     loadProducts();
   }, []);
 
