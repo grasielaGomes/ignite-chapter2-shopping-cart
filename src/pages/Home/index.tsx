@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 
 import { ProductList } from './styles';
@@ -26,9 +26,7 @@ const Home = (): JSX.Element => {
   const { addProduct, cart } = useCart();
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
-    sumAmount[product.id]
-    ? sumAmount[product.id] += 1
-    : sumAmount[product.id] = 1;
+    sumAmount[product.id] = product.amount;
     return sumAmount;
   }, {} as CartItemsAmount)
 
